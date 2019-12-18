@@ -163,3 +163,7 @@ build.gradle，gradle的构建配置，这是我们要关心的，相当于Maven
 GradleLearn.iml，IntelliJ IDEA的项目文件
 gradlew，一段gradle wrapper的运行脚本，For *nix
 gradlew.bat，一段gradle wrapper的运行脚本，For Windows
+### 1.8 项目私服配置
+
+
+### 1.9 wrapper详解
