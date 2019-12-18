@@ -1,0 +1,11 @@
+2019-12-16 16:03:33,776 INFO [http-nio-8080-exec-5] c.s.e.s.I.PersonServiceImpl [?:?] - 入参id1
+2019-12-16 16:04:29,245 INFO [http-nio-8080-exec-1] c.s.e.s.I.PersonServiceImpl [?:?] - 入参id1
+2019-12-16 16:05:57,959 INFO [http-nio-8080-exec-1] c.s.e.s.I.PersonServiceImpl [?:?] - 入参id1
+2019-12-16 16:06:30,345 INFO [http-nio-8080-exec-1] c.s.e.s.I.PersonServiceImpl [?:?] - 入参id1
+2019-12-16 16:07:04,756 INFO [http-nio-8080-exec-1] c.s.e.s.I.PersonServiceImpl [?:?] - 入参id1
+2019-12-16 16:08:02,432 INFO [http-nio-8080-exec-1] c.s.e.s.I.PersonServiceImpl [?:?] - 入参id1
+2019-12-16 16:08:47,823 INFO [http-nio-8080-exec-1] c.s.e.s.I.PersonServiceImpl [?:?] - 入参id1
+2019-12-16 16:09:46,507 INFO [http-nio-8080-exec-1] c.s.e.s.I.PersonServiceImpl [?:?] - 入参id1
+2019-12-16 16:09:46,761 DEBUG [http-nio-8080-exec-1] c.s.e.d.P.selectByPrimaryKey [?:?] - ==>  Preparing: select id, name, mobile, age, create_time, update_time from person where id = ? 
+2019-12-16 16:09:46,802 DEBUG [http-nio-8080-exec-1] c.s.e.d.P.selectByPrimaryKey [?:?] - ==> Parameters: 1(Integer)
+2019-12-16 16:09:46,831 DEBUG [http-nio-8080-exec-1] c.s.e.d.P.selectByPrimaryKey [?:?] - <==      Total: 1

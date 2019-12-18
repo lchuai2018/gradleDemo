@@ -1,0 +1,110 @@
+// buildscript必须在顶部，注意位置
+buildscript {
+    repositories {
+        // 优先使用国内源
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenCentral()
+    }
+    dependencies {
+        // 让spring-boot支持gradle
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
+        // mybatis-generator 插件路径mybatis-generetor
+        classpath "gradle.plugin.com.arenagod.gradle:mybatis-generator-plugin:1.4"
+
+    }
+}
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.1.1.RELEASE'
+}
+//添加Java插件
+apply plugin: 'java'
+apply plugin: 'idea'
+// 使用spring boot
+apply plugin: "org.springframework.boot"
+// 使用spring boot的自动依赖管理
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.arenagod.gradle.MybatisGenerator'
+//上传私服插件
+apply plugin: 'maven-publish'
+//定义项目信息
+group 'cn.sisun'
+version '1.0-SNAPSHOT'
+//指定编码环境
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+//设置编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+//创建javadoc
+task createJavadoc(type: Javadoc) {
+    source = sourceSets.main.allJava
+}
+//添加资源库
+repositories {
+    // 使用国内的源
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    //mavenLocal()//添加maven本地资源库
+    mavenCentral()//添加maven中央资源库
+}
+configurations {
+    //这里需要使用 MyBatis Generator，MySQL 驱动，以及 MyBatis Mapper.
+    //由于代码生成单独运行即可,不需要参与到整个项目的编译，因此在 build.gradle 中添加配置：
+    mybatisGenerator
+}
+//添加依赖库
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    //spring 支持测试
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.15.Final'
+    //mysql
+    runtime("mysql:mysql-connector-java")
+    //配置mybatis 数据源
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0")
+    //单元测试
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
+    //反向生成
+    compile group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.3.6'
+    //logback日志
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
+    testCompileOnly 'org.projectlombok:lombok:1.18.4'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.4'
+}
+
+mybatisGenerator {
+    verbose = true
+    configFile = 'src/main/resources/mybatis/generator.xml'
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version project.version
+            //若是war包，就写components.web,若是jar包，就写components.java
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+
+            if (project.version.endsWith('-SNAPSHOT')) {
+                url = "https://repo.rdc.aliyun.com/repository/103781-snapshot-uiBBx6/"
+            } else {
+                //url = "release版本的仓库地址"
+                url = "https://repo.rdc.aliyun.com/repository/103781-release-DZZMeV/"
+            }
+
+            credentials {
+                //username 'nexus仓库用户名'
+                //password 'nexus仓库密码'
+                username 'f0IcGA'
+                password 'AOszk0BX7K'
+            }
+        }
+    }
+}
