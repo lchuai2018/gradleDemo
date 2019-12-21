@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: erp-demo
+  profiles:
+    active: dev

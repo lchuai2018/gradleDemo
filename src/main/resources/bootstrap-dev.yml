@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: erp-demo
+  cloud:
+    consul:
+      host: 192.168.2.3
+      port: 8500
+      config:
+        enabled: true
+        name: ${spring.application.name}
+        watch:
+          enabled: true
+          delay: 1000
+          wait-time: 55
+        fail-fast: true
+        format: yaml
+        prefix: config
+        data-key: data
+        default-context: ${spring.application.name}
+    config:
+      # 标识overrideSystemProperties属性是否启用。默认为true，设置为false意为禁止用户的设置
+      allow-override: true
+      # 用来标识外部配置是否能够覆盖系统属性，默认为true
+      override-system-properties: true
+      # 当allowOverride为true时，overrideNone设置为true，外部的配置优先级更低，而且不能覆盖任何存在的属性源。默认为false
+      override-none: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: false

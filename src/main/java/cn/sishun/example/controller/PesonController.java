@@ -4,10 +4,7 @@ import cn.sishun.example.entity.Person;
 import cn.sishun.example.service.PersonService;
 import cn.sishun.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: lichenghuai
@@ -19,10 +16,17 @@ public class PesonController {
 
     @Autowired
     private PersonService personService;
-
     @GetMapping("/")
     Person findById() {
         Person person = personService.findById(1);
         return person;
     }
+
+ /*   @ApiOperation("根据id读取数据")
+    @ApiImplicitParam(value = "用户id",name="id",required = true,dataType = "String",paramType = "path")
+    @RequestMapping(value = "/read/{id}",method = RequestMethod.GET)
+    public Person read(@PathVariable("id") int id){
+        Person person = personService.findById(1);
+        return person;
+    }*/
 }
